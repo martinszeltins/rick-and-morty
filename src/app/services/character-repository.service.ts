@@ -7,11 +7,11 @@ import RickAndMortyApiResponse from '@/types/api/rick-and-morty-api-response'
 })
 
 export class CharacterRepositoryService {
-    private apiUrl = 'https://rickandmortyapi.com/api/character?page=1'
+    private apiUrl = 'https://rickandmortyapi.com/api/character'
 
     constructor(private httpClient: HttpClient) {}
 
-    getAll() {
-        return this.httpClient.get<RickAndMortyApiResponse>(this.apiUrl)
+    get(options: { page: number }) {
+        return this.httpClient.get<RickAndMortyApiResponse>(`${this.apiUrl}?page=${options.page}`)
     }
 }

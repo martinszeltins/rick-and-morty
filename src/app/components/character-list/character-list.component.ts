@@ -8,12 +8,13 @@ import { CharacterRepositoryService } from '@/services/character-repository.serv
 })
 
 export class CharacterListComponent implements OnInit {
+    page = 1
     characters: Character[] = []
     
     constructor(private characterRepositoryService: CharacterRepositoryService) {}
 
     getCharacters() {
-        this.characterRepositoryService.getAll().subscribe(characters => {
+        this.characterRepositoryService.get({ page: this.page }).subscribe(characters => {
             this.characters = characters.results
         })
     }
