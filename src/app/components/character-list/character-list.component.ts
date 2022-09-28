@@ -15,8 +15,13 @@ export class CharacterListComponent implements OnInit {
 
     getCharacters() {
         this.characterRepositoryService.get({ page: this.page }).subscribe(characters => {
-            this.characters = characters.results
+            this.characters = [ ...this.characters, ...characters.results ]
         })
+    }
+
+    onScroll() {
+        this.page++
+        this.getCharacters()
     }
 
     ngOnInit() {

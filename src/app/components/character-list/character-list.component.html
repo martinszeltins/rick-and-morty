@@ -1,4 +1,10 @@
-<div class="grid grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-5 pb-5">
+<div
+    class="grid grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-5 pb-5"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()">
+    
     <app-character
         *ngFor="let character of characters"
         [character]="character">
