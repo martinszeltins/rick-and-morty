@@ -9,6 +9,7 @@ import { CharacterRepositoryService } from '@/services/character-repository.serv
 
 export class CharacterListComponent implements OnInit {
     page = 1
+    isLoading = false
     characters: Character[] = []
     
     constructor(private characterRepositoryService: CharacterRepositoryService) {}
@@ -16,11 +17,13 @@ export class CharacterListComponent implements OnInit {
     getCharacters() {
         this.characterRepositoryService.get({ page: this.page }).subscribe(characters => {
             this.characters = [ ...this.characters, ...characters.results ]
+            this.isLoading = false
         })
     }
 
     onScroll() {
         this.page++
+        this.isLoading = true
         this.getCharacters()
     }
 

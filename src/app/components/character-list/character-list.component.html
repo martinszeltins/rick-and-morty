@@ -1,12 +1,21 @@
+<div *ngIf="!characters.length" class="text-center text-gray-300 text-3xl italic">
+    Loading...
+</div>
+
 <div
+    *ngIf="characters.length"
     class="grid grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-5 pb-5"
     infiniteScroll
     [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="50"
     (scrolled)="onScroll()">
-    
+
     <app-character
         *ngFor="let character of characters"
         [character]="character">
     </app-character>
+</div>
+
+<div *ngIf="isLoading" class="text-center text-gray-300 text-3xl italic pb-5">
+    Loading more...
 </div>
