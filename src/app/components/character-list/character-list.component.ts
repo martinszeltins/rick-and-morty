@@ -15,9 +15,14 @@ export class CharacterListComponent implements OnInit {
     constructor(private characterRepositoryService: CharacterRepositoryService) {}
 
     getCharacters() {
-        this.characterRepositoryService.get({ page: this.page }).subscribe(characters => {
-            this.characters = [ ...this.characters, ...characters.results ]
-            this.isLoading = false
+        this.characterRepositoryService.get({ page: this.page }).subscribe({
+            next: (characters) => {
+                this.characters = [ ...this.characters, ...characters.results ]
+                this.isLoading = false
+            },
+            error: () => {
+                this.isLoading = false
+            },
         })
     }
 
